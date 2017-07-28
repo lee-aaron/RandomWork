@@ -9,7 +9,7 @@ index()
 [ ! -f $(pwd)/Manga/manga.txt ] && touch ./Manga/manga.txt
 
 PS3='Type a number corresponding to option: '
-options=("Download Manga" "Check & Download Updates" "Delete Manga" "Quit")
+options=("Download Manga" "Check for Updates" "Delete Manga" "Quit")
 select opt in "${options[@]}"
 do
 	case $opt in
@@ -139,10 +139,27 @@ do
 					cd ..
 				fi
 			done 9< "manga.txt"
-			echo "Downloads complete. Please use 'gnome-open' to open the PDFs."	
+			echo "Downloads complete. Please use 'gnome-open' to open the PDFs."
+			cd ..
 			;;
-		"Check & Download Updates")
-			echo "In Progress"
+		"Check for Updates")
+			cd Manga
+			while IFS='' read -r line <&9 || [[ -n "$line" ]]; do
+				manga=$line
+				manga=${manga,,}
+				wget -O temp.html -q www.mangareader.net/$manga
+				latest=$(grep -m1 -oP "(?<=a href=\"/${manga}/).*(?=</a>)" temp.html)
+				chapl=$(echo $latest | sed -e 's/.*>//g')
+				lnum=$(cat -n temp.html | grep "$chap1" | tail -1 | cut -f 1)
+				((lnum++))
+				date=$(sed "${lnum}q;d" temp.html)
+				date=${date:4:-5}
+				rm temp.html
+				chap="${chapl##* }"
+				title="${chapl% *}"
+				printf "%-25s %35s %18s\n" "$title" "$chap" "$date"
+			done 9< "manga.txt"
+			cd ..
 			;;
 		"Delete Manga")
 			echo "Which manga would you like to delete? (ex. One Piece or Kono Subarashii Sekai Ni Shukufuku O)"
