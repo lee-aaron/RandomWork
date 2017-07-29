@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/fluent-hc-4.5.3.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/httpclient-cache-4.5.3.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/httpclient-win-4.5.3.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="G:/GitHub/RandomWork/AnimeDownloader/httpcomponents-client-4.5.3-bin/lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
