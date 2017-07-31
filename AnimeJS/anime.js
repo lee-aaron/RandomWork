@@ -36,27 +36,14 @@ function readWebpage(i) {
 	}
 }
 
-function httpGet(url) {
-	if (window.XMLHttpRequest) {
-		xmlhttp = new XMLHttpRequest();
-	} else {
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function () {
-		if (this.readyState == this.DONE) {
-			dump(xmlhttp.responseText);
-		}
-	}
-	xmlhttp.open("GET", url, false);
-	xmlhttp.send();
+function openLink(url) {
+	var win = window.open(url, "_blank");
 }
 
 fetchAnime();
 for (i in animeList) {
 	readWebpage(i);
-}
-for (i in links) {
 	console.log(links[i]);
 	parsedLink.push(links[i].toString());
-	httpGet(parsedLink[i]);
+	openLink(parsedLink[i]);
 }
