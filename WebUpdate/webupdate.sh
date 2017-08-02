@@ -31,6 +31,7 @@ do
 			done
 			cd Manga
 			while IFS='' read -r line <&9 || [[ -n "$line" ]]; do
+				[ ! -d ./$line ] && mkdir -p ./$line
 				cd $line
 				manga=$line
 				manga=${manga//-/ }
@@ -93,21 +94,21 @@ do
 					echo "End:"
 					read chape
 					for((c=$chaps;c<=$chape;c++)) do
-						[ ! -d ./$chaps ] && mkdir -p ./$chaps
-						cd $chaps
+						[ ! -d ./$c ] && mkdir -p ./$c
+						cd $c
 						line=${line,,}
-						wget -q -O index.html -c www.mangareader.net/$line/$chaps
+						wget -q -O index.html -c www.mangareader.net/$line/$c
 						if grep -q "not released yet" index.html; then
-							echo "Ch. $chaps of $line  is not available at www.mangareader.net"
+							echo "Ch. $c of $line  is not available at www.mangareader.net"
 							cd ..
-							rm -rf $chaps
+							rm -rf $c
 							break
 						fi
 						rm index.html
 						declare -i i=1
 						while true; do
-							echo "Downloading page $i of Ch. $chaps"
-							wget -q -O $i.html -c www.mangareader.net/$line/$chaps/$i
+							echo "Downloading page $i of Ch. $c"
+							wget -q -O $i.html -c www.mangareader.net/$line/$c/$i
 							grep 'src=\"http' $i.html | grep 'mangareader' > jump.txt
 							link=$(head -n 1 jump.txt)
 							starti=$(index $link "11q")
@@ -127,14 +128,14 @@ do
 							i=i+1
 						done
 						echo "Converting to pdf..."
-						chapno=0000$chaps
+						chapno=0000$c
 						chapno=${chapno: -4}
 						convert *.jpg ../Ch$chapno.pdf
 						echo "Cleaning up....."
 						cd ..
 						path=$(pwd)
 						echo -e "Your downloaded file is in this path:\n" $path
-						rm -rf $chaps
+						rm -rf $c
 					done
 					cd ..
 				fi
@@ -165,8 +166,8 @@ do
 			echo "Which manga would you like to delete? (ex. One Piece or Kono Subarashii Sekai Ni Shukufuku O)"
 			read resp
 			resp=${resp// /-}
-			if [ -d  ./$resp ]; then
-				rm -r ./$resp
+			if [ -d  ./Manga/$resp ]; then
+				rm -r ./Manga/$resp
 				echo "Manga deleted"			
 			else
 				echo "Manga doesn't exist"				
